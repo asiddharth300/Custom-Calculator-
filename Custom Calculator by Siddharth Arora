@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cases and Boxes Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .calculator-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 45%;
+            padding: 10px;
+            margin: 5px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h2>Cases and Boxes Calculator</h2>
+        <label for="x">Boxes per Case:</label>
+        <input type="number" id="x" value="1"><br>
+        <label for="y">Strips per Box:</label>
+        <input type="number" id="y" value="1"><br>
+        <label for="z">Total Strips:</label>
+        <input type="number" id="z" value="1"><br>
+        <button onclick="calculate()">Calculate</button>
+        <button onclick="resetFields()">Reset</button>
+        <p id="result"></p>
+    </div>
+
+    <script>
+        function calculate() {
+            var x = parseInt(document.getElementById("x").value);
+            var y = parseInt(document.getElementById("y").value);
+            var z = parseInt(document.getElementById("z").value);
+            
+            var cases = Math.floor(z / (x * y));
+            var remainingStrips = z % (x * y);
+            var boxes = Math.floor(remainingStrips / y);
+            var looseStrips = remainingStrips % y;
+
+            document.getElementById("result").innerText = 
+                cases + " Cases, " + boxes + " Boxes, and " + looseStrips + " Loose Strips";
+        }
+
+        function resetFields() {
+            document.getElementById("x").value = 1;
+            document.getElementById("y").value = 1;
+            document.getElementById("z").value = 1;
+            document.getElementById("result").innerText = "";
+        }
+    </script>
+</body>
+</html>
